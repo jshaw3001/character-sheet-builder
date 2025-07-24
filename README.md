@@ -8,6 +8,11 @@ To-Do:
 - Complete sheet viewer UI that parses json data and displays a complete character sheet with functioning buttons for simulated dice-rolling within the UI.
 - Test project on another machine to figure out install/run requirements for third party usage.
 
+Builder:
+
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/0f0d934f-12bb-4dfa-959b-7c05438eb3e2" />
+
+
 Using Sun Valley ttk theme from https://github.com/rdbende/Sun-Valley-ttk-theme
 
 My first personal project with boot.dev
