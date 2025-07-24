@@ -9,3 +9,5 @@ To-Do:
 - Test project on another machine to figure out install/run requirements for third party usage.
 
 Using Sun Valley ttk theme from https://github.com/rdbende/Sun-Valley-ttk-theme
+
+My first personal project with boot.dev
