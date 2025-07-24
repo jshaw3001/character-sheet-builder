@@ -1,3 +1,4 @@
+ABILITY_NAMES = ["Athletics", "Bravery", "Wit", "Charm"]
 POINT_POOL = 8
 
 def point_cost(score):

@@ -6,8 +6,8 @@ class Character:
 
     def validate(self):
         for key, val in self.stats.items():
-            if not (1 <= val <= 20):
-                raise ValueError(f"{key} must be between 1 and 20")
+            if not (4 <= val <= 8):
+                raise ValueError(f"{key} must be 4 between and 8")
     
     def to_dict(self):
         return {
