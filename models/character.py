@@ -1,8 +1,9 @@
 class Character:
-    def __init__(self, name, char_class, stats):
+    def __init__(self, name, char_class, stats, level=1):
         self.name = name
         self.char_class = char_class
         self.stats = stats
+        self.level = level
 
     def validate(self):
         for key, val in self.stats.items():
@@ -13,5 +14,6 @@ class Character:
         return {
             "name": self.name,
             "class": self.char_class,
-            "stats": self.stats
+            "level": self.level,
+            "stats": self.stats,            
         }

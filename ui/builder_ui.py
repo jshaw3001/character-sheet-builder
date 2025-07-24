@@ -1,5 +1,9 @@
+import os
+import re
+import json
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
+from models.character import Character
 from data.classes import classes
 from data.point_buy import POINT_POOL, point_cost, total_points_spent, remaining_points, ABILITY_NAMES
 
@@ -22,9 +26,35 @@ class App(tk.Tk):
         self.class_selector = ClassSelect(self)
         self.ability_title = AbilityTitle(self)
         self.ability_points = Abilities(self)
+        self.submit_button = Submit(self, self.submit_character)
 
         #run
         self.mainloop()
+
+    def submit_character(self):
+        name = self.name.input.get()
+        # Validate name
+        if not name or not re.match(r'^[\w\s]+$', name):
+            tk.messagebox.showerror("Validation Error", "Name must contain only letters, numbers, and spaces.")
+            return
+        # Sanitize for filename: replace spaces with underscores, remove non-filename-safe chars
+        safe_name = re.sub(r'\s+', '_', name)
+        safe_name = re.sub(r'[^\w\-]', '', safe_name).lower()
+
+        char_class = self.class_selector.selected_class.get()
+        stats = {k: v.get() for k, v in self.ability_points.abilities.items()}
+        level = 1 # Default level, can be extended later
+        character = Character(name, char_class, stats, level)
+        try:
+            character.validate()
+        except ValueError as e:
+            messagebox.showerror("Validation Error", str(e))
+            return
+        os.makedirs("characters", exist_ok=True)
+        filepath = os.path.join("characters", f"{safe_name}.json")
+        with open(filepath, "w") as f:
+            json.dump(character.to_dict(), f, indent=2)
+        messagebox.showinfo("Success", f"Character saved as {filepath}")
 
 class Header(ttk.Label):
     def __init__(self, master, text):
@@ -40,9 +70,9 @@ class Name(ttk.Frame):
     
     def create_widgets(self):
         name_label = ttk.Label(self, text="Name:")
-        name_input = ttk.Entry(self)
+        self.input = ttk.Entry(self)
         name_label.pack(pady=5)
-        name_input.pack()
+        self.input.pack()
 
 class ClassSelect(ttk.Frame):
 
@@ -190,3 +220,7 @@ class Abilities(ttk.Frame):
         self.remaining_label.config(text=f"Points remaining: {points_left}")
         self.update_cost_labels()
      
+class Submit(ttk.Button):
+    def __init__(self, master, command, text="Submit"):
+        super().__init__(master, text=text, command=command)
+        self.pack(pady=10)

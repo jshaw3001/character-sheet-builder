@@ -1,0 +1,11 @@
+{
+  "name": "Jaime Aster",
+  "class": "Knight",
+  "level": 1,
+  "stats": {
+    "Athletics": 7,
+    "Bravery": 7,
+    "Wit": 4,
+    "Charm": 4
+  }
+}
