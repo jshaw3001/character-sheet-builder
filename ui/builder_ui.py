@@ -5,31 +5,24 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from models.character import Character
 from data.classes import classes
-from data.point_buy import POINT_POOL, point_cost, total_points_spent, remaining_points, ABILITY_NAMES
-
-import sv_ttk
+from data.point_buy import POINT_POOL, point_cost, remaining_points, ABILITY_NAMES
 
 
-class App(tk.Tk):
-    def __init__(self, title, size):
-        super().__init__()
 
-        #main setup
-        self.title(title)
-        self.geometry(f"{size[0]}x{size[1]}")
-        self.resizable(False, False)
-        sv_ttk.set_theme("dark")
 
+class BuilderApp(ttk.Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.create_widgets()
+    
+    def create_widgets(self):
         #widgets
-        self.header = Header(self, title)
+        self.header = Header(self, "Character Sheet Builder")
         self.name = Name(self)
         self.class_selector = ClassSelect(self)
         self.ability_title = AbilityTitle(self)
         self.ability_points = Abilities(self)
         self.submit_button = Submit(self, self.submit_character)
-
-        #run
-        self.mainloop()
 
     def submit_character(self):
         name = self.name.input.get()
@@ -78,7 +71,7 @@ class ClassSelect(ttk.Frame):
 
     def __init__(self, master):
         super().__init__(master)
-        self.class_names = list(classes.keys())
+        self.class_names = list(c.value for c in classes.keys())  # Use .value for display
         self.selected_class = tk.StringVar()
         self.abilities_text = "Scaling abilities: "
         self.description_text = "Description: "
@@ -107,7 +100,8 @@ class ClassSelect(ttk.Frame):
 
     def show_class_info(self, event=None):
         cls = self.selected_class.get()
-        info = classes.get(cls, {})
+        selected_enum = next(c for c in classes.keys() if c.value == cls)
+        info = classes.get(selected_enum, {})
         desc = info.get("description", "No description.")
         scrs = info.get("abilities", "No abilities.")
         self.description_label.config(text=desc)
