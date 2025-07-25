@@ -1,6 +1,10 @@
 Generic Tabletop RPG Character Sheet Builder and Viewer!
 
-Very basic character sheet builder/viewer software using Tkinter UI. Character data is stored as a generated .json file in a generated "characters" directory in the same directory as main.py. All game-related aspects (classes, ability scores, dice rolling) are intended to be non-specific and generic with zero balance or real use case.
+Very basic character sheet builder/viewer software using Tkinter UI. 
+Character data is stored as a generated .json file in a generated "characters" directory in the same directory as main.py.
+Sheet view has a dropdown that generates a list of characters by Name and (Class) from the json files in the "characters" directory.
+When a character is selected from the dropdown the sheet is generated, including basic information, skills, and functioning roll buttons that print to a pseudo-terminal.
+All game-related aspects (classes, ability scores, dice rolling) are intended to be non-specific and generic with zero balance or real use case.
 
 Builder:
 
