@@ -6,6 +6,8 @@ Sheet view has a dropdown that generates a list of characters by Name and (Class
 When a character is selected from the dropdown the sheet is generated, including basic information, skills, and functioning roll buttons that print to a pseudo-terminal.
 All game-related aspects (classes, ability scores, dice rolling) are intended to be non-specific and generic with zero balance or real use case.
 
+To run, install requirements from requirements.txt and run main.py with no arguments.
+
 Builder:
 
 <img width="802" height="632" alt="Character Sheet Builder Frame" src="https://github.com/user-attachments/assets/1db4ebd8-f6e9-47a4-b8d9-6a1ee7ada78a" />
